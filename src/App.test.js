@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+/* eslint-disable jest/valid-title */
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import '@testing-library/jest-dom';
 
@@ -7,7 +8,9 @@ beforeEach(() => {
   render(<App />);
 });
 
-//Definis test
+afterEach(cleanup);
+
+// Definition of test
 describe("UI Test", () => {
   test('renders image', () => {
     const logo = screen.getByRole('img');
@@ -28,8 +31,8 @@ describe("UI Test", () => {
 
 describe("Functional Test", () => {
   const clicked = 10;
-  const clickDec = 0;
-  //Increment
+
+  // Increment
   test(`Test on increment button adds 1 to the counter ${clicked}`, () => {
     const incButton = screen.getByTestId('increment-test')
     const counterEl = screen.getByTestId('counter')
@@ -41,7 +44,7 @@ describe("Functional Test", () => {
     expect(counterEl.textContent).toBe(`${clicked}`)
   })
 
-  //Decrement
+  // Decrement
   test('Test on decrement button reduce 10 to the counter 0', () => {
     const decButton = screen.getByTestId('decrement-test')
     const counterEl = screen.getByTestId('counter')
@@ -49,6 +52,16 @@ describe("Functional Test", () => {
     for(let i = clicked ; i<0; i--) {
       fireEvent.click(decButton)
     }
+
+    expect(counterEl.textContent).toBe('0')
+  })
+
+  // Reset
+  test('Test on reset button to the counter 0', () => {
+    const resetButton = screen.getByTestId('reset-test')
+    const counterEl = screen.getByTestId('counter')
+
+    fireEvent.click(resetButton)
 
     expect(counterEl.textContent).toBe('0')
   })

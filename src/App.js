@@ -2,15 +2,24 @@ import React, {useState} from 'react';
 import { FunctionalCounter } from './pages/FunctionalCounter';
 
 function App() {
-  //Declare the state and method, and also init the value of state
+  // Declare the state and method, and also init the value of state
   let [count, setCount] = useState(0)
+  let max = 10
+  let min = 0
+  let step = 1
 
   const increment = () => {
-    setCount(count+1);
+    if(count >= max) return alert("max");
+    setCount(count + step);
   }
 
   const decrement = () => {
-    setCount(count-1);
+    if(count === min) return alert("min");
+    setCount(count - step);
+  }
+
+  const reset = () => {
+    setCount(0);
   }
 
   return (
@@ -21,7 +30,7 @@ function App() {
         </div>
         <div>Tailwind CSS with Create React App</div>
         <div className="border p-5 rounded-xl bg-slate-300 shadow-lg">
-          <FunctionalCounter count={count} inc={increment} dec={decrement}/>
+          <FunctionalCounter count={count} inc={increment} dec={decrement} reset={reset}/>
         </div>
       </div>
     </h1>
