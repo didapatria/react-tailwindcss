@@ -27,30 +27,30 @@ describe("UI Test", () => {
 })
 
 describe("Functional Test", () => {
-  const clickInc = 10;
+  const clicked = 10;
   const clickDec = 0;
   //Increment
-  test(`Test on increment button adds 1 to the counter ${clickInc}`, () => {
+  test(`Test on increment button adds 1 to the counter ${clicked}`, () => {
     const incButton = screen.getByTestId('increment-test')
     const counterEl = screen.getByTestId('counter')
 
-    for(let i = 0; i<clickInc; i++) {
+    for(let i = 0; i<clicked; i++) {
       fireEvent.click(incButton)
     }
 
-    expect(counterEl.textContent).toBe(`${clickInc}`)
+    expect(counterEl.textContent).toBe(`${clicked}`)
   })
 
   //Decrement
-  test(`Test on decrement button reduce 1 to the counter ${clickDec}`, () => {
+  test('Test on decrement button reduce 10 to the counter 0', () => {
     const decButton = screen.getByTestId('decrement-test')
     const counterEl = screen.getByTestId('counter')
 
-    for(let i = 10 ; i<clickDec; i--) {
+    for(let i = clicked ; i<0; i--) {
       fireEvent.click(decButton)
     }
 
-    expect(counterEl.textContent).toBe(`${clickDec}`)
+    expect(counterEl.textContent).toBe('0')
   })
 })
 
